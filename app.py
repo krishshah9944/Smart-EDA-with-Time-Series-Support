@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -10,38 +9,32 @@ from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 
-# Load environment variables
+
 load_dotenv()
 
-# Set page config
+
 st.set_page_config(page_title="EDA Chatbot", page_icon="📊")
 
-# Set up sidebar
-with st.sidebar:
-    st.title("EDA Chatbot 🤖")
-    st.markdown("""
-    Upload your CSV file and get automatic EDA!
-    """)
-    # groq_api_key = st.text_input("Groq API Key", type="password")
-    # st.info("Get your Groq API key from https://console.groq.com/keys")
 
-# Main app
+
+
+
 st.title("📊 Smart EDA with Time Series Support")
 
-# File upload
+
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
 def detect_time_series(df):
     """Detect time series data by checking for datetime columns with clear formats."""
     time_cols = []
     for col in df.columns:
-        # Skip columns with numeric data (e.g., age, IDs)
+      
         if pd.api.types.is_numeric_dtype(df[col]):
             continue
         
-        # Try converting to datetime with strict error handling
+      
         try:
-            # Attempt to parse the column as datetime
+         
             pd.to_datetime(df[col], errors='raise')
             time_cols.append(col)
         except:
@@ -50,7 +43,7 @@ def detect_time_series(df):
     return time_cols if time_cols else None
 
 def generate_eda_code(df, is_time_series=False, time_col=None):
-    # Prepare template with enhanced instructions
+   
     template = """You are a senior data scientist. Perform comprehensive EDA on the provided dataset.
     Generate Python code for complete exploratory data analysis with visualizations.
     
@@ -108,12 +101,12 @@ def generate_eda_code(df, is_time_series=False, time_col=None):
     
     return response
 
-# Process file and generate EDA
+
 if uploaded_file is not None:
-    # Load data
+    
     df = pd.read_csv(uploaded_file)
     
-    # Detect time series
+  
     time_cols = detect_time_series(df)
     is_time_series = bool(time_cols)
     selected_time_col = None
@@ -122,34 +115,34 @@ if uploaded_file is not None:
         st.success(f"⏰ Time series detected in columns: {', '.join(time_cols)}")
         selected_time_col = st.selectbox("Select time series column", time_cols)
         
-        # Convert to datetime
+        
         df[selected_time_col] = pd.to_datetime(df[selected_time_col])
         df = df.sort_values(selected_time_col).set_index(selected_time_col)
     else:
         st.info("🔍 No time series data detected. Proceeding with regular EDA.")
     
-    # Show basic info
+    
     with st.expander("Show raw data"):
         st.dataframe(df.head())
     
-    # Generate EDA
+   
     if st.button("Generate Comprehensive EDA"):
         with st.spinner("Analyzing data..."):
             try:
                 response = generate_eda_code(df, is_time_series, selected_time_col)
                 
-                # Extract code and insights
+           
                 code_blocks = re.findall(r'```python(.*?)```', response, re.DOTALL)
                 insights = response.split("### INSIGHTS:")[-1].strip()
                 
-                # Display code
+        
                 with st.expander("Generated EDA Code"):
                     for code in code_blocks:
                         st.code(code.strip())
                     
                     
                 
-                # Display enhanced insights
+                
                 with st.expander("Detailed Analysis Insights"):
                     st.markdown(f"""
                     **Comprehensive Insights:**
