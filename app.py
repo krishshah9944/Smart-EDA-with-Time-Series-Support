@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+api_key=st.secrets("GROQ_API_KEY")
 st.set_page_config(page_title="EDA Chatbot", page_icon="📊")
 
 
@@ -88,7 +88,7 @@ def generate_eda_code(df, is_time_series=False, time_col=None):
     chat = ChatGroq(
         temperature=0.1,
         model_name="mixtral-8x7b-32768",
-        groq_api_key=st.secrets("GROQ_API_KEY")
+        groq_api_key=api_key
     )
 
     chain = LLMChain(llm=chat, prompt=prompt)
