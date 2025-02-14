@@ -22,8 +22,8 @@ with st.sidebar:
     st.markdown("""
     Upload your CSV file and get automatic EDA!
     """)
-    groq_api_key = st.text_input("Groq API Key", type="password")
-    st.info("Get your Groq API key from https://console.groq.com/keys")
+    # groq_api_key = st.text_input("Groq API Key", type="password")
+    # st.info("Get your Groq API key from https://console.groq.com/keys")
 
 # Main app
 st.title("📊 Smart EDA with Time Series Support")
@@ -95,7 +95,7 @@ def generate_eda_code(df, is_time_series=False, time_col=None):
     chat = ChatGroq(
         temperature=0.1,
         model_name="mixtral-8x7b-32768",
-        groq_api_key=groq_api_key or st.secrets("GROQ_API_KEY")
+        groq_api_key=st.secrets("GROQ_API_KEY")
     )
 
     chain = LLMChain(llm=chat, prompt=prompt)
