@@ -11,6 +11,10 @@ Smart EDA is an AI-powered tool that automates exploratory data analysis (EDA) w
 - **AI-Powered Insights**: Leverages Groq’s Mixtral-8x7B-32768 model to analyze and summarize data.
 - **Streamlit Interface**: Interactive and user-friendly data exploration experience.
 
+## 🎥 Demo
+
+Check out the live demo: [Smart EDA App](https://smart-eda-with-time-series-support.streamlit.app)
+
 ## 🛠️ Installation
 
 ### 1️⃣ Clone the Repository
@@ -63,7 +67,6 @@ streamlit run app.py
 3. If time series data is detected, it provides additional trend analysis.
 
 
-
 ## 🤝 Contributing
 
 Feel free to contribute by submitting issues or pull requests. Suggestions and improvements are always welcome!
@@ -73,5 +76,5 @@ Feel free to contribute by submitting issues or pull requests. Suggestions and i
 For inquiries, reach out via:
 
 - **LinkedIn**: [Krish Shah](https://www.linkedin.com/in/krishshah9944/)
-- **Email**: [krishshah9944@gmail.com](mailto\:krishshah9944@gmail.com)
+- **Email**: [krishshah9944@gmail.com](mailto:krishshah9944@gmail.com)
 
