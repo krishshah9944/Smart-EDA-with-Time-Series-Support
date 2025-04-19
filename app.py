@@ -87,7 +87,7 @@ def generate_eda_code(df, is_time_series=False, time_col=None):
     # Initialize Groq
     chat = ChatGroq(
         temperature=0.1,
-        model_name="mixtral-8x7b-32768",
+        model_name="llama-3.1-8b-instant",
         groq_api_key=api_key
     )
 
